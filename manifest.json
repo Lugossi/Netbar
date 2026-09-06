@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "id": "lugossi.netbar",
+  "name": "NetBar",
+  "version": "1.0.0",
+  "author": "lugossi",
+  "license": "MIT",
+  "description": "See every port you have left listening, which project opened it, whether it is exposed to the network, and kill it from the bar.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "NetBar.qml"
+  },
+  "barWidget": {
+    "displayName": "NetBar",
+    "description": "Listening ports, the processes holding them, and a kill switch.",
+    "category": "Network",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "refreshIntervalSec": 15,
+      "includeUdp": false,
+      "notifyOnNew": false,
+      "showSystem": false,
+      "hideWhenIdle": false,
+      "dockerPrompt": true
+    },
+    "schema": [
+      {
+        "key": "refreshIntervalSec",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "min": 3,
+        "max": 600,
+        "step": 1,
+        "defaultValue": 15,
+        "description": "How often to rescan while the panel is closed. The panel polls every 2s while open."
+      },
+      {
+        "key": "includeUdp",
+        "type": "boolean",
+        "label": "Include UDP sockets",
+        "defaultValue": false,
+        "description": "UDP listeners are mostly mDNS and DNS chatter, so they are hidden by default."
+      },
+      {
+        "key": "notifyOnNew",
+        "type": "boolean",
+        "label": "Notify when a new port opens",
+        "defaultValue": false,
+        "description": "Send a desktop notification the first time a dev server appears on a port."
+      },
+      {
+        "key": "showSystem",
+        "type": "boolean",
+        "label": "Show system and other-user ports",
+        "defaultValue": false,
+        "description": "Include listeners you cannot kill, such as sshd and cupsd. Toggle per-session with 's'."
+      },
+      {
+        "key": "hideWhenIdle",
+        "type": "boolean",
+        "label": "Hide the widget when nothing is listening",
+        "defaultValue": false,
+        "description": "Keep the bar clean and only surface NetBar when a dev server is actually up."
+      },
+      {
+        "key": "dockerPrompt",
+        "type": "boolean",
+        "label": "Offer to enable Docker access",
+        "defaultValue": true,
+        "description": "Show a one-click grant when Docker is running but unreadable. Installs a narrow sudo rule for a single helper, not docker-group membership."
+      }
+    ]
+  }
+}
