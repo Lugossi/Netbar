@@ -167,6 +167,28 @@ below accepts either form. To reset one, delete the key from that entry.
 ## Install
 
 ```bash
+omarchy plugin add https://github.com/Lugossi/Netbar.git --enable --yes
+omarchy bar move lugossi.netbar --section right
+```
+
+That clones into `~/.config/omarchy/plugins/lugossi.netbar`, named from the
+manifest id. Plugins normally land disabled so you can read the code before
+running it, since they execute unsandboxed inside `omarchy-shell`; drop
+`--enable --yes` if you would rather review first and enable by hand.
+
+Updating and removal go through the same command:
+
+```bash
+omarchy plugin update lugossi.netbar
+omarchy plugin remove lugossi.netbar
+```
+
+Requires `python3` and `iproute2`, both of which ship with Omarchy. Docker is
+optional.
+
+For local work on the plugin itself, symlink a checkout instead of cloning:
+
+```bash
 ln -s /path/to/NetBar ~/.config/omarchy/plugins/lugossi.netbar
 omarchy-shell shell rescanPlugins
 omarchy plugin enable lugossi.netbar --section right
